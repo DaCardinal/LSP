@@ -1,0 +1,47 @@
+#  This is a sample trace containing initialization, link-state packets, 
+#  unicast routing events and multicast events which are representative 
+#  of input to your program. 
+#
+
+#  We'll start with all the events in the unicast trace, as before 
+
+0   I  4325  <4214, 6>  <4718, 9>  <1203, 11> 
+
+18  L  4214  12  <4325, 6>  <4718, 5>  <1483, 9>
+
+29  L  4109  78  <4718, 3>  <1483, 2>  
+
+35  F  4109
+
+
+#  New events start here.
+
+47  A  1203  56634  4810
+
+#  Node 1203 has just announced a new multicast session with address 56634.
+#  (Note that the multicast address is in the right range).
+#  Multicast traffic on this address is only valid until time 4810.
+
+50  J  4109  56634
+
+#  Receiver 4109 has decided to join the multicast group
+
+58  J  4718  56634
+
+#  so has node 4718. 
+
+67  F  1203 56634  
+
+#  You have been requested to forward a multicast packet from node 1203 to 
+#  multicast group 56634.
+
+70  F  4718 56634
+
+#  Any subscriber might send a packet to a given multicast group.
+
+75  Q  1203 56634 
+
+#  Here node 1203 has decided to quit a multicast session.  Even 
+#  though 1203 advertised the session, the session should persist after the
+#  originator leaves if other members are still participating, up until
+#  the expiration time (4810).
